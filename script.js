@@ -96,18 +96,43 @@ window.addEventListener("load", function () {
 });
 
 
+// const observer = new IntersectionObserver(
+//   (entries) => {
+//     entries.forEach((entry) => {
+//       if (entry.isIntersecting) {
+//         const counter = entry.target;
+//         let endValue = '0' + counter.textContent;
+//         let startValue = 0 ;
+//         let updating = setInterval(() => {
+//           startValue += endValue / 200;
+//           counter.textContent = '0'+ startValue.toFixed(0);
+//           if (startValue > endValue) {
+//             counter.textContent =   endValue;
+//             clearInterval(updating);
+//             observer.unobserve(counter);
+//           }
+//         }, 5);
+//       }
+//     });
+//   },
+//   { threshold: 1 }
+// );
+// document
+//   .querySelectorAll(".counter")
+//   .forEach((counter) => observer.observe(counter));
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const counter = entry.target;
-        let endValue = '0' + counter.textContent;
-        let startValue = 0 ;
+        let endValue = parseInt(counter.textContent);
+        let startValue = 0;
         let updating = setInterval(() => {
           startValue += endValue / 200;
-          counter.textContent = '0'+ startValue.toFixed(0);
-          if (startValue > endValue) {
-            counter.textContent =   endValue;
+          let displayValue = Math.min(startValue, endValue).toFixed(0);
+          counter.textContent = displayValue.length < 2 ? '0' + displayValue : displayValue;
+          if (startValue >= endValue) {
+            counter.textContent = endValue < 10 ? '0' + endValue : endValue.toString();
             clearInterval(updating);
             observer.unobserve(counter);
           }
@@ -117,9 +142,9 @@ const observer = new IntersectionObserver(
   },
   { threshold: 1 }
 );
-document
-  .querySelectorAll(".counter")
-  .forEach((counter) => observer.observe(counter));
+
+document.querySelectorAll(".counter").forEach((counter) => observer.observe(counter));
+
 
 
  
