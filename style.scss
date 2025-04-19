@@ -535,8 +535,8 @@ ul {
                 justify-content: center;
             }
             .item {
-                width: 300px;
-                height: 300px;
+                width:100%;
+                height: 250px;
                 display: flex;
                 border-radius: 20px;
                 justify-content: center;
@@ -636,6 +636,20 @@ ul {
             figure {
                 overflow: hidden;
                 --bs-aspect-ratio: 67%;
+                background: linear-gradient(0deg, rgba(18, 18, 19, 0.712) 0%, rgb(18, 18, 19) 100%);
+                figcaption{
+                    color: #ffffff;
+                    display: flex;
+                    padding: 20px;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    transition: all 0.3s cubic-bezier(0.43, 0.08, 0.41, 0.78);
+
+                    h5{
+                        text-align: left;
+                        margin-bottom: 15px;
+                    }
+                }
             }
             .img-content {
                 color: #ffffff;
@@ -651,6 +665,10 @@ ul {
                 @media (min-width:1200px){
                     &:after {
                         height: 100%;
+                    }
+                    figcaption{
+                        opacity: 0;
+                        visibility: hidden;
                     }
                     .img-content {
                         visibility: visible;
